@@ -22,6 +22,7 @@ machine:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
     TOOLDIR: "$HOME/.bt"
     TPATH: "$PATH:$TOOLDIR/bin"
+    DOCKERIMG: "centos:centos6:7"
 
 ## Customize checkout
 checkout:
@@ -39,11 +40,11 @@ dependencies:
     - docker info && docker version
     # Cache some Docker images to make builds faster
     - mkdir -p ~/docker
-    # Cache centos:centos7
-    - if [[ -e ~/docker/centos.tar ]]; then docker load -i ~/docker/centos.tar; else docker pull centos:centos7 && docker save centos:centos7 > ~/docker/centos.tar; fi
-
+    # Cache $DOCKERIMG
+    - if [[ -e ~/docker/$DOCKERIMG.tar ]]; then docker load -i ~/docker/$DOCKERIMG.tar; else docker pull $DOCKERIMG && docker save $DOCKERIMG> ~/docker/$DOCKERIMG.tar; fi
+    - ls -l ~/docker
   override:
-    - docker pull centos:centos7
+    - docker pull $DOCKERIMG
 
 
 
