@@ -25,7 +25,7 @@ checkout:
     - pwd
     - ls -l
     - ls -l ..
-    - bash install-tools.sh
+    - bash install-bt.sh
     - ls -l ~/.bt
     - which bt
     - echo "$PATH"
