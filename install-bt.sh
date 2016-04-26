@@ -22,7 +22,7 @@ if ! [[ -d "$TOOLDIR" ]]
  then
   #doesnt exist, clone it.
   echo "Creating $TOOLDIR"
-  git clone "$BTREPO" "$TOOLDIR" > /dev/null
+  git clone -b dsr-orchestration "$BTREPO" "$TOOLDIR" > /dev/null
   if [ "$1" != "" ]; then
     cd "$TOOLDIR"
     git checkout $1 > /dev/null

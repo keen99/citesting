@@ -35,6 +35,16 @@ checkout:
     - . $TOOLDIR/source-tools.sh
 #    -
 
+
+deployment:
+  prod:
+    branch: /prod/
+    commands:
+      - echo "deploy to prod!"
+
+
+
+
 # ## Customize dependencies
 # dependencies:
 #   pre:
