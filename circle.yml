@@ -22,8 +22,13 @@ machine:
 ## Customize checkout
 checkout:
   post:
-    - git clone git@gitlab.com:hypops/buildtools.git bt
-    - ls -l bt
+    - pwd
+    - ls -l
+    - ls -l ..
+    - bash install-tools.sh
+    - ls -l ~/.bt
+    - which bt
+    - echo "$PATH"
 
 # ## Customize dependencies
 # dependencies:
