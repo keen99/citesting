@@ -15,9 +15,10 @@ machine:
     dev.mycompany.com: 127.0.0.1
 
   # # Add some environment variables
-  # environment:
-  #   CIRCLE_ENV: test
-  #   DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+  environment:
+    CIRCLE_ENV: test
+    DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+    TOOLDIR: "$HOME/.bt"
 
 ## Customize checkout
 checkout:
@@ -27,8 +28,10 @@ checkout:
     - ls -l ..
     - bash install-bt.sh
     - ls -l ~/.bt
-    - which bt
     - echo "$PATH"
+    - $TOOLDIR/bt help
+    - . $TOOLDIR/source-tools.sh
+#    -
 
 # ## Customize dependencies
 # dependencies:
