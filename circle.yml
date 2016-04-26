@@ -1,5 +1,7 @@
-## Customize the test machine
+
 machine:
+  services:
+    - docker
 
   # timezone:
   #   America/New_York # Set the timezone
@@ -29,21 +31,36 @@ checkout:
     - ls -l ..
 
 
-
 dependencies:
-   pre:
-#     - npm install coffeescript # install from a different package manager
-#     - gem uninstall bundler # use a custom version of bundler
-#     - gem install bundler --pre
-    #clone is in here.
-    - bash install-bt.sh dsr-orchestration
-    - ls -l ~/.bt
-    - echo "$PATH"
-    - echo "$TPATH"
-    - $TOOLDIR/bin/bt help
-    - . $TOOLDIR/source-tools.sh
-    - echo "$PATH"
-#    -
+  cache_directories:
+    - "~/docker"
+
+  pre:
+    - docker info && docker version
+    # Cache some Docker images to make builds faster
+    - mkdir -p ~/docker
+    # Cache centos:centos7
+    - if [[ -e ~/docker/centos.tar ]]; then docker load -i ~/docker/centos.tar; else docker pull centos:centos7 && docker save centos:centos7 > ~/docker/centos.tar; fi
+
+  override:
+    - docker pull centos:centos7
+
+
+
+# dependencies:
+#    pre:
+# #     - npm install coffeescript # install from a different package manager
+# #     - gem uninstall bundler # use a custom version of bundler
+# #     - gem install bundler --pre
+#     #clone is in here.
+#     - bash install-bt.sh dsr-orchestration
+#     - ls -l ~/.bt
+#     - echo "$PATH"
+#     - echo "$TPATH"
+#     - $TOOLDIR/bin/bt help
+#     - . $TOOLDIR/source-tools.sh
+#     - echo "$PATH"
+# #    -
 
 
 test:
