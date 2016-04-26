@@ -46,6 +46,10 @@ dependencies:
 #    -
 
 
+test:
+  override:
+    - echo "We don't need no stinkin tests"
+
 deployment:
   prod:
     branch: /prod/
