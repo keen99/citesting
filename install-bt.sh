@@ -22,12 +22,8 @@ if ! [[ -d "$TOOLDIR" ]]
  then
   #doesnt exist, clone it.
   echo "Creating $TOOLDIR"
-  git clone -b dsr-orchestration "$BTREPO" "$TOOLDIR" > /dev/null
-  if [ "$1" != "" ]; then
-    cd "$TOOLDIR"
-    git checkout $1 > /dev/null
-    cd "$OLDPWD"
-  fi
+  [ "$1" != "" ] && BRANCH="-b $1"
+  git clone ${BRANCH:=} "$BTREPO" "$TOOLDIR" > /dev/null
 else
   #exists, update it.
   echo "Updating $TOOLDIR"
