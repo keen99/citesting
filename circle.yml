@@ -27,12 +27,14 @@ checkout:
     - pwd
     - ls -l
     - ls -l ..
+    #clone is in here.
     - bash install-bt.sh
     - ls -l ~/.bt
     - echo "$PATH"
     - echo "$TPATH"
     - $TOOLDIR/bin/bt help
     - . $TOOLDIR/source-tools.sh
+    - echo "$PATH"
 #    -
 
 
