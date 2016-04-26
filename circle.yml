@@ -19,6 +19,7 @@ machine:
     CIRCLE_ENV: test
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
     TOOLDIR: "$HOME/.bt"
+    TPATH: "$PATH:$TOOLDIR/bin"
 
 ## Customize checkout
 checkout:
@@ -29,7 +30,8 @@ checkout:
     - bash install-bt.sh
     - ls -l ~/.bt
     - echo "$PATH"
-    - $TOOLDIR/bt help
+    - echo "$TPATH"
+    - $TOOLDIR/bin/bt help
     - . $TOOLDIR/source-tools.sh
 #    -
 
