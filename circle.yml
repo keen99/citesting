@@ -23,6 +23,7 @@ machine:
     TOOLDIR: "$HOME/.bt"
     TPATH: "$PATH:$TOOLDIR/bin"
     DOCKERIMG: "centos:centos6.7"
+    OURIMG: "ourimg"
 
 ## Customize checkout
 checkout:
@@ -46,7 +47,7 @@ dependencies:
   override:
     - docker pull $DOCKERIMG
   post:
-    - docker build -t ourimg .
+    - docker build -t $OURIMG .
 
 
 
@@ -72,7 +73,7 @@ test:
     - echo "We don't need no stinkin tests"
     - docker images
     - docker run $DOCKERIMG echo "we're testing on $DOCKERIMG"
-    - docker run mine echo "we're testing on MINE"
+    - docker run $OURIMG echo "we're testing on MINE"
 
 deployment:
   prod:
