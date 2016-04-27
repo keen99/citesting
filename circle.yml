@@ -30,12 +30,14 @@ machine:
 
 dependencies:
   cache_directories:
-    - "~/.bt"
+#    - "~/.bt"
+    - "$TOOLDIR"
+
 
   pre:
     #clone is in here.
     - bash install-bt.sh dsr-orchestration
-    - ls -l ~/.bt
+    - date;ls -l ~/.bt
     - echo "$PATH"
     - $TOOLDIR/bin/bt help
     #we updated path, lets see if it worked
