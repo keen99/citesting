@@ -43,15 +43,19 @@ dependencies:
     # Cache our base Docker image to make builds faster
     - mkdir -p ~/docker
     - echo "Caching $DOCKERIMG"
-    - if [[ -e ~/docker/$DOCKERIMG.tar ]]; then docker load -i ~/docker/$DOCKERIMG.tar; else docker pull $DOCKERIMG && docker save $DOCKERIMG > ~/docker/$DOCKERIMG.tar; fi
+    ## load, pull (to verify up to date), then save.
+    - if [[ -e ~/docker/$DOCKERIMG.tar ]]; then docker load -i ~/docker/$DOCKERIMG.tar=; fi && docker pull $DOCKERIMG && docker save $DOCKERIMG > ~/docker/$DOCKERIMG.tar
     - ls -l ~/docker
     # now build and cache our docker image - this will use our cached last build image as a base
-    - if [[ -e ~/docker/$OURIMG.tar ]]; then docker load -i ~/docker/$OURIMG.tar; else docker build -t $OURIMG . && docker save $OURIMG > ~/docker/$OURIMG.tar; fi
+    - echo "Building and caching $OURIMG"
+    ## load, build (to make sure up to date), then save
+    - if [[ -e ~/docker/$OURIMG.tar ]]; then docker load -i ~/docker/$OURIMG.tar; fi && docker build -t $OURIMG . && docker save $OURIMG > ~/docker/$OURIMG.tar
     - ls -l ~/docker
     ##a cache cleanup could be useful here... delete files that aren't base or ours
     ## no, this isn't whitespace safe.
     - find ~/docker -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs echo
   override:
+    ##do we really need these?  last ditch just in case?
     - docker pull $DOCKERIMG
     - docker build -t $OURIMG .
 
