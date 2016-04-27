@@ -56,7 +56,7 @@ dependencies:
     ##a cache cleanup could be useful here... delete files that aren't base or ours
     ## no, this isn't whitespace safe....
     - echo "Cleaning docker image cache"
-    - find ~/docker -type f -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs -r rm -v
+    - find ~/docker -type f -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs rm -vf  #-f so it doesnt error if given empty list by retarded xargs.  and xargs -r isn't portable.
   override:
     ##do we really need these?  last ditch just in case?
     - docker pull $DOCKERIMG
