@@ -73,7 +73,8 @@ test:
     - echo "We don't need no stinkin tests"
     - docker images
     - docker run $DOCKERIMG echo "we're testing on $DOCKERIMG"
-    - docker run $OURIMG echo "we're testing on MINE"
+    - docker run $OURIMG echo "we're testing on $OURIMG"
+    - docker run $OURIMG ls -al . /
 
 deployment:
   prod:
