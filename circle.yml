@@ -46,9 +46,11 @@ dependencies:
     - if [[ -e ~/docker/$DOCKERIMG.tar ]]; then docker load -i ~/docker/$DOCKERIMG.tar; else docker pull $DOCKERIMG && docker save $DOCKERIMG > ~/docker/$DOCKERIMG.tar; fi
     - ls -l ~/docker
     # now build and cache our docker image - this will use our cached last build image as a base
-    - if [[ -e ~/docker/$OURIMG.tar ]]; then docker load -i ~/docker/$OURIMG.tar; else docker build -t $OURIMG && docker save $OURIMG > ~/docker/$OURIMG.tar; fi
+    - if [[ -e ~/docker/$OURIMG.tar ]]; then docker load -i ~/docker/$OURIMG.tar; else docker build -t $OURIMG . && docker save $OURIMG > ~/docker/$OURIMG.tar; fi
     - ls -l ~/docker
     ##a cache cleanup could be useful here... delete files that aren't base or ours
+    ## no, this isn't whitespace safe.
+    - find ~/docker -print | grep -Fxv -e "$DOCKERIMG" -e "$OURIMG"
   override:
     - docker pull $DOCKERIMG
     - docker build -t $OURIMG .
