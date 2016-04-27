@@ -45,6 +45,8 @@ dependencies:
     - ls -l ~/docker
   override:
     - docker pull $DOCKERIMG
+  post:
+    - docker build -t ourimg .
 
 
 
@@ -68,7 +70,9 @@ dependencies:
 test:
   override:
     - echo "We don't need no stinkin tests"
-    - docker run $DOCKERIMG echo "we're testing"
+    - docker images
+    - docker run $DOCKERIMG echo "we're testing on $DOCKERIMG"
+    - docker run mine echo "we're testing on MINE"
 
 deployment:
   prod:

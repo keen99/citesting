@@ -1,6 +1,9 @@
 
 FROM centos:centos6.7
 
+
+RUN echo "mine"
+
 # RUN \
 #   yum update -y && \
 #   yum install -y epel-release
