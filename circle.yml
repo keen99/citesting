@@ -1,7 +1,5 @@
 
 machine:
-  java:
-    version: openjdk8
   services:
     - docker
 
@@ -92,9 +90,7 @@ test:
     - docker run $OURIMG echo "we're testing on $OURIMG"
     ## ~ and $HOME does NOT work right here since it's the outside-container ~
     - docker run $OURIMG ls -al . / /build
-    - docker run $OURIMG "cd "
-    - mvn -v
-    - java -version
+
 
 deployment:
   prod:
