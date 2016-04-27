@@ -5,6 +5,9 @@ general:
     only:
       - master # list of branches to build
 #      - /feature-.*/ # or regexes
+  artifacts:
+    - "target/tarballs"
+
 
 machine:
   java:
@@ -50,6 +53,9 @@ dependencies:
 test:
   override:
     - echo "We don't need no stinkin tests"
+  post:
+    - mkdir $CIRCLE_ARTIFACTS/tarballs
+    - mv target/tarballs/*.t* $CIRCLE_ARTIFACTS/tarballs
 
 
 deployment:
