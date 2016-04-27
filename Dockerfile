@@ -8,7 +8,7 @@ RUN echo "mine 2"
 ## I suppose we STILL do..
 RUN \
   yum update -y && \
-  yum install -y epel-release \
+  yum install -y epel-release git && \
   yum clean all
 
 #   #&&

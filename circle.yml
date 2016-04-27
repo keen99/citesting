@@ -1,5 +1,7 @@
 
 machine:
+  java:
+    version: openjdk8
   services:
     - docker
 
@@ -22,8 +24,8 @@ machine:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
     TOOLDIR: "$HOME/.bt"
     TPATH: "$PATH:$TOOLDIR/bin"
-    DOCKERIMG: "centos:centos6.7"
-    OURIMG: "ourimg"
+    DOCKERIMG: "centos:centos6.7"  #should match what's in your dockerfile, if you're using a dockerfile....
+    OURIMG: "ourimg"  #just a tag we use internally to reference the image we build
 
 ## Customize checkout
 checkout:
@@ -53,12 +55,13 @@ dependencies:
     - ls -l ~/docker
     ##a cache cleanup could be useful here... delete files that aren't base or ours
     ## no, this isn't whitespace safe....
-    - find ~/docker -type f -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs rm
+    - echo "Cleaning docker image cache"
+    - find ~/docker -type f -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs rm -v
   override:
     ##do we really need these?  last ditch just in case?
     - docker pull $DOCKERIMG
     - docker build -t $OURIMG .
-
+    - docker images  #so we have a record in the log of where we were.
 #  post:
 #    - docker build -t $OURIMG .
 
@@ -87,8 +90,11 @@ test:
     - docker images
     - docker run $DOCKERIMG echo "we're testing on $DOCKERIMG"
     - docker run $OURIMG echo "we're testing on $OURIMG"
-    ## ~ does NOT work right here since it's the outside-container ~
-    - docker run $OURIMG ls -al . / /build \$HOME \~/
+    ## ~ and $HOME does NOT work right here since it's the outside-container ~
+    - docker run $OURIMG ls -al . / /build
+    - docker run $OURIMG "cd "
+    - mvn -v
+    - java -version
 
 deployment:
   prod:

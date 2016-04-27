@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 ##
 ##  boilerplate code for getting this installed and updated.
 ##
@@ -7,14 +9,14 @@
 
 
 ##don't use a shared toolkit for jenkins - could cause race issues with multiple projects..
-if [[ "x$JENKINS_HOME" == "x" ]]
- then
-  #if we're not jenkins, just use $HOME
-  TOOLDIR=${TOOLDIR:=$HOME/.bt}
-else
+# if [[ "x$JENKINS_HOME" == "x" ]]
+#  then
+#   #if we're not jenkins, just use $HOME
+#   TOOLDIR=${TOOLDIR:=$HOME/.bt}
+# else
   #if we're jenkins, put it in $PWD instead.
   TOOLDIR=${TOOLDIR:=$PWD/.bt}
-fi
+# fi
 
 BTREPO="git@gitlab.com:hypops/buildtools.git"
 
@@ -36,5 +38,7 @@ else
 fi
 
 ## update your path...
+
+ls -la $TOOLDIR
 
 source "${TOOLDIR}/source-tools.sh"
