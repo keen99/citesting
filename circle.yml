@@ -10,8 +10,8 @@ machine:
   java:
     version: openjdk8
 
-  # timezone:
-  #   America/New_York # Set the timezone
+  timezone:
+    America/New_York # Set the timezone
 
 
   # # Add some environment variables
@@ -39,7 +39,8 @@ dependencies:
     - date;ls -l ~/.bt
     #we updated path, lets see if it worked
     - bt help
-
+    - mvn -v   ## be sure these are around and working
+    - java -version
   override:
     - bt build
   # post:
@@ -49,8 +50,7 @@ dependencies:
 test:
   override:
     - echo "We don't need no stinkin tests"
-    - mvn -v
-    - java -version
+
 
 deployment:
   prod:
