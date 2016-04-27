@@ -40,8 +40,8 @@ dependencies:
     - docker info && docker version
     # Cache some Docker images to make builds faster
     - mkdir -p ~/docker
-    # Cache $DOCKERIMG
-    - if [[ -e ~/docker/$DOCKERIMG.tar ]]; then docker load -i ~/docker/$DOCKERIMG.tar; else docker pull $DOCKERIMG && docker save $DOCKERIMG> ~/docker/$DOCKERIMG.tar; fi
+    - echo "Caching $DOCKERIMG"
+    - if [[ -e ~/docker/$DOCKERIMG.tar ]]; then docker load -i ~/docker/$DOCKERIMG.tar; else docker pull $DOCKERIMG && docker save $DOCKERIMG > ~/docker/$DOCKERIMG.tar; fi
     - ls -l ~/docker
   override:
     - docker pull $DOCKERIMG
