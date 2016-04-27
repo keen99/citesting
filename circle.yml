@@ -22,7 +22,7 @@ machine:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
     TOOLDIR: "$HOME/.bt"
     TPATH: "$PATH:$TOOLDIR/bin"
-    DOCKERIMG: "centos:centos6:7"
+    DOCKERIMG: "centos:centos6.7"
 
 ## Customize checkout
 checkout:
