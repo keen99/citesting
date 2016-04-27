@@ -53,7 +53,7 @@ dependencies:
     - ls -l ~/docker
     ##a cache cleanup could be useful here... delete files that aren't base or ours
     ## no, this isn't whitespace safe....
-    - find ~/docker -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs rm
+    - find ~/docker -type f -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs rm
   override:
     ##do we really need these?  last ditch just in case?
     - docker pull $DOCKERIMG
