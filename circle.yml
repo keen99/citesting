@@ -5,13 +5,16 @@ general:
     only:
       - master # list of branches to build
 #      - /feature-.*/ # or regexes
+  artifacts:
+    - "target/tarballs"
+
 
 machine:
   java:
     version: openjdk8
 
-  # timezone:
-  #   America/New_York # Set the timezone
+  timezone:
+    America/New_York # Set the timezone
 
 
   # # Add some environment variables
@@ -20,7 +23,7 @@ machine:
     PATH: "$PATH:$TOOLDIR/bin"
 
 ## Customize checkout
-checkout:
+#checkout:
   # post:
   #   - pwd
   #   - ls -la
@@ -30,27 +33,30 @@ checkout:
 
 dependencies:
   cache_directories:
+    ## cannot use env vars here, so match this to tooldir
     - "~/.bt"
-
   pre:
+    ## install buildtool
     #clone is in here.
     - bash install-bt.sh dsr-orchestration
-    - ls -l ~/.bt
-    - echo "$PATH"
-    - $TOOLDIR/bin/bt help
+    - date;ls -l ~/.bt
     #we updated path, lets see if it worked
     - bt help
-
+    - mvn -v   ## be sure these are around and working
+    - java -version
   override:
-  post:
+    - bt build
+  # post:
 
 
 
 test:
   override:
     - echo "We don't need no stinkin tests"
-    - mvn -v
-    - java -version
+  post:
+    - mkdir $CIRCLE_ARTIFACTS/tarballs
+    - mv target/tarballs/*.t* $CIRCLE_ARTIFACTS/tarballs
+
 
 deployment:
   prod:
