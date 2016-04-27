@@ -83,7 +83,7 @@ test:
     - docker images
     - docker run $DOCKERIMG echo "we're testing on $DOCKERIMG"
     - docker run $OURIMG echo "we're testing on $OURIMG"
-    - docker run $OURIMG ls -al . /
+    - docker run $OURIMG ls -al . / /build ~/
 
 deployment:
   prod:
