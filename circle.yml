@@ -20,7 +20,7 @@ machine:
     PATH: "$PATH:$TOOLDIR/bin"
 
 ## Customize checkout
-checkout:
+#checkout:
   # post:
   #   - pwd
   #   - ls -la
