@@ -87,7 +87,8 @@ test:
     - docker images
     - docker run $DOCKERIMG echo "we're testing on $DOCKERIMG"
     - docker run $OURIMG echo "we're testing on $OURIMG"
-    - docker run $OURIMG ls -al . / /build ~/
+    ## ~ does NOT work right here since it's the outside-container ~
+    - docker run $OURIMG ls -al . / /build \$HOME \~/
 
 deployment:
   prod:
