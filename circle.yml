@@ -54,7 +54,8 @@ test:
   override:
     - echo "We don't need no stinkin tests"
   post:
-    - mkdir $CIRCLE_ARTIFACTS/tarballs
+    - mkdir -p $CIRCLE_ARTIFACTS/tarballs
+    - mkdir -p target/tarballs && touch target/tarballs/faketar.tar
     - mv target/tarballs/*.t* $CIRCLE_ARTIFACTS/tarballs
 
 
