@@ -30,20 +30,18 @@ machine:
 
 dependencies:
   cache_directories:
-#    - "~/.bt"
-    - "$TOOLDIR"
-
-
+    ## cannot use env vars here, so match this to tooldir
+    - "~/.bt"
   pre:
+    ## install buildtool
     #clone is in here.
     - bash install-bt.sh dsr-orchestration
     - date;ls -l ~/.bt
-    - echo "$PATH"
-    - $TOOLDIR/bin/bt help
     #we updated path, lets see if it worked
     - bt help
 
-  # override:
+  override:
+    - bt build
   # post:
 
 
