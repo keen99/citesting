@@ -29,8 +29,9 @@ machine:
 checkout:
   post:
     - pwd
-    - ls -l
-    - ls -l ..
+    - ls -la
+    - ls -la ..
+    - ls -la ~/
 
 
 dependencies:
@@ -39,15 +40,21 @@ dependencies:
 
   pre:
     - docker info && docker version
-    # Cache some Docker images to make builds faster
+    # Cache our base Docker image to make builds faster
     - mkdir -p ~/docker
     - echo "Caching $DOCKERIMG"
     - if [[ -e ~/docker/$DOCKERIMG.tar ]]; then docker load -i ~/docker/$DOCKERIMG.tar; else docker pull $DOCKERIMG && docker save $DOCKERIMG > ~/docker/$DOCKERIMG.tar; fi
     - ls -l ~/docker
+    # now build and cache our docker image - this will use our cached last build image as a base
+    - if [[ -e ~/docker/$OURIMG.tar ]]; then docker load -i ~/docker/$OURIMG.tar; else docker build -t $OURIMG && docker save $OURIMG > ~/docker/$OURIMG.tar; fi
+    - ls -l ~/docker
+    ##a cache cleanup could be useful here... delete files that aren't base or ours
   override:
     - docker pull $DOCKERIMG
-  post:
     - docker build -t $OURIMG .
+
+#  post:
+#    - docker build -t $OURIMG .
 
 
 
