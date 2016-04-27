@@ -48,6 +48,7 @@ dependencies:
 
 
 
+
 # dependencies:
 #    pre:
 # #     - npm install coffeescript # install from a different package manager
@@ -67,6 +68,7 @@ dependencies:
 test:
   override:
     - echo "We don't need no stinkin tests"
+    - docker run  echo "we're testing"
 
 deployment:
   prod:
