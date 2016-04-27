@@ -50,7 +50,7 @@ dependencies:
     - ls -l ~/docker
     ##a cache cleanup could be useful here... delete files that aren't base or ours
     ## no, this isn't whitespace safe.
-    - find ~/docker -print | grep -Fxv -e "$DOCKERIMG" -e "$OURIMG"
+    - find ~/docker -print | grep -Fv -e "$DOCKERIMG" -e "$OURIMG"|xargs echo
   override:
     - docker pull $DOCKERIMG
     - docker build -t $OURIMG .
