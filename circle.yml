@@ -41,8 +41,8 @@ dependencies:
     #we updated path, lets see if it worked
     - bt help
 
-  override:
-  post:
+  # override:
+  # post:
 
 
 
