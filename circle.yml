@@ -11,8 +11,8 @@ dependencies:
   override:
     - echo "deps"
 #    - set| grep -e CIRCLE -e CI | grep -e "="
-    - set| grep -e "dsr" -e "DSR":
-      CIRCLE_DSR2: "test command level"
+    - set| grep -e "dsr" -e "DSR"
+    #      CIRCLE_DSR2: "test command level"
 
 
 # test:
