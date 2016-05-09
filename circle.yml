@@ -6,8 +6,8 @@ machine:
 
 
 dependencies:
-  environment:
-    CIRCLE_DSR: "test deps level" ## NO
+  # environment: - warning
+  #   CIRCLE_DSR: "test deps level" ## NO
   override:
     # environment:  - ERROR
     #   CIRCLE_DSR1: "test override level"
