@@ -4,15 +4,13 @@
 dependencies:
   override:
     - echo "deps"
-    - env| grep -e CIRCLE -e CI
-    - set| grep -e CIRCLE -e CI
+    - set| grep -e CIRCLE -e CI | grep -e "="
 
 
 test:
   override:
     - echo "test"
-    - env | grep -e CIRCLE -e CI
-    - set| grep -e CIRCLE -e CI
+    - set| grep -e CIRCLE -e CI | grep -e "="
 
 
 
@@ -22,5 +20,4 @@ deployment:
     commands:
       - echo "deploy to prod!"
       - echo "deploy"
-      - env| grep -e CIRCLE -e CI
-      - set| grep -e CIRCLE -e CI
+      - set| grep -e CIRCLE -e CI | grep -e "="
