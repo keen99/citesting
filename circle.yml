@@ -23,6 +23,7 @@ dependencies:
         environment:
           foo: bar
           foo2: bar2
+          dsr: fuckyou
         pwd:
           .
 
