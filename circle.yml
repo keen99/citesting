@@ -17,7 +17,8 @@ machine:
 
 dependencies:
   override:
-    - echo bundle install:
+#    - echo bundle install:
+    - set| grep -e "dsr" -e "DSR":
         timeout: 240
         environment:
           foo: bar
