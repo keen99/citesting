@@ -12,10 +12,10 @@ dependencies:
 #     - echo "deps"
 # #    - set| grep -e CIRCLE -e CI | grep -e "="
     - set| grep -e "dsr" -e "DSR":
-        environment: NO. errors no matter what I try.
+        environment:  # NO. errors no matter what I try.
           dsr: ohfuck
-#          CIRCLE_DSR45: singleword
-#          CIRCLE_DSR2: "test command level"
+          CIRCLE_DSR45: singleword
+          CIRCLE_DSR2: "test command level"
 
 
 # dependencies:
