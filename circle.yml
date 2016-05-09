@@ -1,0 +1,26 @@
+
+
+
+dependencies:
+  override:
+    - echo "deps"
+    - env
+    - set
+
+
+test:
+  override:
+    - echo "test"
+    - env
+    - set
+
+
+
+deployment:
+  prod:
+    branch: /.*/
+    commands:
+      - echo "deploy to prod!"
+      - echo "deploy"
+      - env
+      - set
