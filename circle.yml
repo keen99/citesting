@@ -13,8 +13,9 @@ dependencies:
 # #    - set| grep -e CIRCLE -e CI | grep -e "="
     - set| grep -e "dsr" -e "DSR":
         environment: NO. errors no matter what I try.
-#          CIRCLE_DSR2: "test command level"
           CIRCLE_DSR45: singleword
+#          CIRCLE_DSR2: "test command level"
+
 
 # dependencies:
 #   override:
