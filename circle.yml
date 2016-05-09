@@ -9,8 +9,6 @@ dependencies:
   # environment: - warning
   #   CIRCLE_DSR: "test deps level" ## NO
   override:
-    # environment:  - ERROR
-    #   CIRCLE_DSR1: "test override level"
     - echo "deps"
 #    - set| grep -e CIRCLE -e CI | grep -e "="
     - set| grep -e "dsr" -e "DSR":
