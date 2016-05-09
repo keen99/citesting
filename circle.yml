@@ -2,22 +2,24 @@
 
 
 dependencies:
+  environment:
+    CIRCLE_DSR: "test"
   override:
     - echo "deps"
     - set| grep -e CIRCLE -e CI | grep -e "="
 
 
-test:
-  override:
-    - echo "test"
-    - set| grep -e CIRCLE -e CI | grep -e "="
+# test:
+#   override:
+#     - echo "test"
+#     - set| grep -e CIRCLE -e CI | grep -e "="
 
 
 
-deployment:
-  prod:
-    branch: /.*/
-    commands:
-      - echo "deploy to prod!"
-      - echo "deploy"
-      - set| grep -e CIRCLE -e CI | grep -e "="
+# deployment:
+#   prod:
+#     branch: /.*/
+#     commands:
+#       - echo "deploy to prod!"
+#       - echo "deploy"
+#       - set| grep -e CIRCLE -e CI | grep -e "="
