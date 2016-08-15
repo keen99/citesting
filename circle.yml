@@ -1,3 +1,15 @@
+general:
+  branches:
+    ignore:
+      - /jouellette-.*/
+      - /agrabish-.*/
+#   branches:
+#     only:
+#       - /dsr-.*/
+# #      - /feature-.*/ # or regexes
+
+
+
 
 machine:
   environment:
@@ -9,46 +21,25 @@ dependencies:
 #   # environment: - warning
 #   #   CIRCLE_DSR: "test deps level" ## NO
   override:
-#     - echo "deps"
+     - echo "deps"
 # #    - set| grep -e CIRCLE -e CI | grep -e "="
-    - set| grep -e "dsr" -e "DSR":
-        environment:  # NO. errors no matter what I try.
-          dsr: ohfuck
-          CIRCLE_DSR45: singleword
-          CIRCLE_DSR2: "test command level"
+    # - set| grep -e "dsr" -e "DSR":
+    #     environment:
+    #       dsr: ohfuck
+    #       CIRCLE_DSR45: singleword
+    #       CIRCLE_DSR2: "test command level"
 
-
-# dependencies:
-#   override:
-# #    - echo bundle install:
-#     - set| grep -e "dsr" -e "DSR":
-#         timeout: 240
-#         environment:
-#           foo: bar
-#           foo2: bar2
-#           dsr: fuckyou
-#         pwd:
-#           .
+test:
+  override:
+    #have to have something here to keep it from trying to $magic up tests
+    - echo "We don't need no stinkin tests"
+#  post:
 
 
 
-
-
-
-
-
-
-# test:
-#   override:
-#     - echo "test"
-#     - set| grep -e CIRCLE -e CI | grep -e "="
-
-
-
-# deployment:
-#   prod:
-#     branch: /.*/
-#     commands:
-#       - echo "deploy to prod!"
-#       - echo "deploy"
-#       - set| grep -e CIRCLE -e CI | grep -e "="
+  stage:
+    tag: /^RELEASE_BETA_.*_RC/
+    commands:
+      ## set appname for readability of the logs, not because we have to.
+      ## these only run if they find a tarball to ship.
+      - echo "stage deploy on tag"
