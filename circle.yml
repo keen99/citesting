@@ -18,6 +18,7 @@ machine:
 
 
 dependencies:
+  pre:
 #   # environment: - warning
 #   #   CIRCLE_DSR: "test deps level" ## NO
   override:
@@ -36,7 +37,7 @@ test:
 #  post:
 
 
-
+deployment:
   stage:
     tag: /^RELEASE_BETA_.*_RC/
     commands:
