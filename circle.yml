@@ -39,7 +39,7 @@ test:
 
 deployment:
   stage:
-    tag: /^RELEASE_BETA_.*_RC/
+    tag: /^RELEASE_BETA_.*_RC.*/
     commands:
       ## set appname for readability of the logs, not because we have to.
       ## these only run if they find a tarball to ship.
