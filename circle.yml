@@ -1,12 +1,12 @@
 general:
-  branches:
-    ignore:
-      - /jouellette-.*/
-      - /agrabish-.*/
 #   branches:
-#     only:
-#       - /dsr-.*/
-# #      - /feature-.*/ # or regexes
+#     ignore:
+#       - /jouellette-.*/
+#       - /agrabish-.*/
+# #   branches:
+# #     only:
+# #       - /dsr-.*/
+# # #      - /feature-.*/ # or regexes
 
 
 
