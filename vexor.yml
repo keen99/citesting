@@ -1,0 +1,8 @@
+language:
+  - scala
+env:
+  global:
+  - RAILS_ENV=test
+
+install:
+  - echo "ok"

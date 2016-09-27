@@ -1,0 +1,116 @@
+
+### temp whitelist.  dont use a whitelist normally!
+general:
+  branches:
+    only:
+      - master # list of branches to build
+#      - /feature-.*/ # or regexes
+  artifacts:
+    - "target/tarballs"
+
+
+machine:
+  java:
+    version: openjdk8
+
+  timezone:
+    America/New_York # Set the timezone
+
+
+  # # Add some environment variables
+  environment:
+    TOOLDIR: "$HOME/.bt"
+    PATH: "$PATH:$TOOLDIR/bin"
+
+## Customize checkout
+#checkout:
+  # post:
+  #   - pwd
+  #   - ls -la
+  #   - ls -la ..
+  #   - ls -la ~/
+
+
+dependencies:
+  cache_directories:
+    ## cannot use env vars here, so match this to tooldir
+    - "~/.bt"
+  pre:
+    ## install buildtool
+    #clone is in here.
+    - bash install-bt.sh dsr-orchestration
+    - date;ls -l ~/.bt
+    #we updated path, lets see if it worked
+    - bt help
+    - mvn -v   ## be sure these are around and working
+    - java -version
+  override:
+    - bt build
+  # post:
+
+
+
+test:
+  override:
+    - echo "We don't need no stinkin tests"
+  post:
+    - mkdir -p $CIRCLE_ARTIFACTS/tarballs
+    - mkdir -p target/tarballs && touch target/tarballs/faketar.tar
+    - mv target/tarballs/*.t* $CIRCLE_ARTIFACTS/tarballs
+
+
+deployment:
+  prod:
+    branch: /prod/
+    commands:
+      - echo "deploy to prod!"
+
+
+
+
+# ## Customize dependencies
+# dependencies:
+#   pre:
+#     - npm install coffeescript # install from a different package manager
+#     - gem uninstall bundler # use a custom version of bundler
+#     - gem install bundler --pre
+
+#   override:
+#     - bundle install: # note ':' here
+#         timeout: 180 # fail if command has no output for 3 minutes
+
+#   # we automatically cache and restore many dependencies between
+#   # builds. If you need to, you can add custom paths to cache:
+#   cache_directories:
+#     - "custom_1"   # relative to the build directory
+#     - "~/custom_2" # relative to the user's home directory
+
+# ## Customize database setup
+# database:
+#   override:
+#     # replace CircleCI's generated database.yml
+#     - cp config/database.yml.ci config/database.yml
+#     - bundle exec rake db:create db:schema:load
+
+# ## Customize test commands
+# test:
+#   override:
+#     - phpunit test/unit-tests # use PHPunit for testing
+#   post:
+#     - bundle exec rake jasmine:ci: # add an extra test type
+#         environment:
+#           RAILS_ENV: test
+#           RACK_ENV: test
+
+# ## Customize deployment commands
+# deployment:
+#   staging:
+#     branch: master
+#     heroku:
+#       appname: foo-bar-123
+
+# ## Custom notifications
+# notify:
+#   webhooks:
+#     # A list of hashes representing hooks. Only the url field is supported.
+#     - url: https://someurl.com/hooks/circle
