@@ -1,8 +1,32 @@
 #
 machine:
 
+
+#http://docs.shippable.com/integrations/imageRegistries/ecr/
+integrations:
+  hub:
+    - integrationName: ecr-integration
+      type: ecr
+      region: us-east-1
+      # branches:
+      #   only:
+      #     - master
+
+
+
 build:
+
+  # pre_ci_boot:
+  #   image_name: aws-account-id.dkr.ecr.us-east-1.amazonaws.com/image-name
+  #   image_tag: tip
+  #   pull: true
+  #   options: "-e HOME=/root"
+
   ci:
+    - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
     - echo "yello"
     - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
 
+#http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-push-docker-image/
+  post_ci:
+    - docker push 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
