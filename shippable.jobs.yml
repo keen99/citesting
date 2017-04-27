@@ -1,5 +1,5 @@
 jobs:
-  - name: my_app_runCI
+  - name: citesting_runCI
     type: runCI
     steps:
       - OUT: my_image
