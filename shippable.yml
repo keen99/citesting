@@ -4,5 +4,5 @@ machine:
 build:
   ci:
     - echo "yello"
-
+    - date > my_image.env
 
