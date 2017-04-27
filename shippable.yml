@@ -1,0 +1,8 @@
+
+machine:
+
+build:
+  ci:
+    - echo "yello"
+
+
