@@ -4,5 +4,5 @@ machine:
 build:
   ci:
     - echo "yello"
-    - date > my_image.env
+    - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
 
