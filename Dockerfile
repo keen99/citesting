@@ -4,7 +4,9 @@ FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
 
-RUN sudo pip install awscli
+RUN apt-get update && apt-get-install -y awscli
+#no pip
+#RUN sudo pip install awscli
 
 ## use same packages we use from ansible - ish, since we dont enforce versions in either.
 
