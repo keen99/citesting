@@ -16,15 +16,23 @@ integrations:
 
 build:
 
-  # pre_ci_boot:
+  pre_ci:
+  # Used primarily if you need to use a custom image for your build or if you need to customize behavior of the default CI container.
+    # - docker pull 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
+    - cat $JOB_STATE/my_image.env
+    - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
+
+
+  pre_ci_boot:
+  # Used to override the default image used for CI with your own custom image. You can also set specific options for booting up the default CI container.
   #   image_name: aws-account-id.dkr.ecr.us-east-1.amazonaws.com/image-name
   #   image_tag: tip
   #   pull: true
   #   options: "-e HOME=/root"
+    image_name: 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
+
 
   ci:
-    - cat $JOB_STATE/my_image.env
-    - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
     - echo "yello"
     - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
     - cat $JOB_STATE/my_image.env
