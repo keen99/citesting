@@ -1,9 +1,10 @@
 resources:
   - name: my_image
     type: image
-    integration: shipdeploy
+    integration: ecr-integration
     pointer:
       sourceName: "devexi:dsr-test-img"
       isPull: false
     seed:
       versionName: "latest"
+
