@@ -6,10 +6,10 @@ RUN echo "mine 2"
 
 ## these should be a single run step - if we break them up, we'd get various upstream states in an image rebuild
 ## I suppose we STILL do..
-RUN \
-  yum update -y && \
-  yum install -y epel-release git && \
-  yum clean all
+# RUN \
+#   yum update -y && \
+#   yum install -y epel-release git && \
+#   yum clean all
 
 #   #&&
 #   #yum install -y iproute python-setuptools hostname inotify-tools yum-utils which
