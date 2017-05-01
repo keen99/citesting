@@ -54,7 +54,8 @@ build:
     - echo "yello"
     # - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
     - cat $JOB_STATE/my_image.env
-
+    - ls -la /
+    - cat /test*
 
 #http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-push-docker-image/
   post_ci:
