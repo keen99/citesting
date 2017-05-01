@@ -4,7 +4,11 @@ FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
 
-RUN apt-get update && apt-get install -y awscli
+
+## no awscli, we dont do docker inside docker
+#https://github.com/Shippable/support/issues/2945
+#http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-custom-ci-image/
+#RUN apt-get update && apt-get install -y awscli
 #no pip
 #RUN sudo pip install awscli
 
