@@ -59,4 +59,5 @@ build:
 #http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-push-docker-image/
   post_ci:
     - ls -laR
-    - docker push 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
+    - cat $JOB_STATE/my_image.env
+    # - docker push 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
