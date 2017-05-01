@@ -1,4 +1,6 @@
 
+## non-ubuntu is NOT supported on shippable!!
+
 FROM centos:centos6.7
 
 
