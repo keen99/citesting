@@ -8,6 +8,7 @@ integrations:
     - integrationName: ecr-integration
       type: ecr
       region: us-east-1
+      agent_only: true
       # branches:
       #   only:
       #     - master
