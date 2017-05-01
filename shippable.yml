@@ -23,9 +23,12 @@ build:
   #   options: "-e HOME=/root"
 
   ci:
+    - cat $JOB_STATE/my_image.env
     - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
     - echo "yello"
     - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
+    - cat $JOB_STATE/my_image.env
+
 
 #http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-push-docker-image/
   post_ci:
