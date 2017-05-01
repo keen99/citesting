@@ -38,7 +38,8 @@ build:
     image_name: 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi
     image_tag: dsr-test-img
     pull: true
-    agent_only: true
+###on INTEGRATIONs not here.
+    # agent_only: true
 ## no awscli, we dont do docker inside docker
 #https://github.com/Shippable/support/issues/2945
 #http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-custom-ci-image/

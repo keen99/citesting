@@ -7,4 +7,5 @@ resources:
       isPull: false
     seed:
       versionName: "latest"
+    agent_only: true
 
