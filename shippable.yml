@@ -24,6 +24,7 @@ build:
     - docker pull 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
     - cat $JOB_STATE/my_image.env
     - ls -laR
+    - date
     - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
     - cat $JOB_STATE/my_image.env
     - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
@@ -54,8 +55,10 @@ build:
     - echo "yello"
     # - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
     - cat $JOB_STATE/my_image.env
-    - ls -la /
+    - date
+    - ls -la /test*
     - cat /test*
+
 
 #http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-push-docker-image/
   post_ci:
