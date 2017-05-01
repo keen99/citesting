@@ -4,7 +4,7 @@ FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
 
-RUN apt-get update && apt-get-install -y awscli
+RUN apt-get update && apt-get install -y awscli
 #no pip
 #RUN sudo pip install awscli
 
