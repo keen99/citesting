@@ -37,9 +37,9 @@ build:
   #   options: "-e HOME=/root"
     image_name: 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
     pull: true
-    - docker images
-    - ls -laR
-    - cat $JOB_STATE/my_image.env
+      - docker images
+      - ls -laR
+      - cat $JOB_STATE/my_image.env
 
 
   ci:
