@@ -2,10 +2,10 @@ resources:
   - name: my_image
     type: image
     integration: ecr-integration
+    agent_only: true
     pointer:
       sourceName: "devexi:dsr-test-img"
       isPull: false
     seed:
       versionName: "latest"
-    agent_only: true
 
