@@ -1,0 +1,9 @@
+resources:
+  - name: my_image
+    type: image
+    integration: shipdeploy
+    pointer:
+      sourceName: "devexi:dsr-test-img"
+      isPull: false
+    seed:
+      versionName: "latest"
