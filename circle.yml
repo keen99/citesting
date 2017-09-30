@@ -1,6 +1,7 @@
 general:
-#   branches:
-#     ignore:
+   branches:
+     ignore:
+		- /.*/
 #       - /jouellette-.*/
 #       - /agrabish-.*/
 # #   branches:
