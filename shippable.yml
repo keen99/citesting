@@ -62,8 +62,8 @@ build:
   #   image_tag: tip
   #   pull: true
   #   options: "-e HOME=/root"
-    image_name: 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi
-    image_tag: dsr-test-img
+    image_name: $IMAGE_NAME
+    image_tag: $IMAGE_TAG
     pull: true
 ###on INTEGRATIONs not here.
     # agent_only: true
@@ -76,13 +76,14 @@ build:
 
 
   ci:
-    - ls -laR
+    # - ls -laR
     - echo "yello"
+    - ls -l /*build*
     # - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
-    - cat $JOB_STATE/my_image.env
-    - date
-    - ls -la /test*
-    - cat /test*
+    # - cat $JOB_STATE/my_image.env
+    # - date
+    # - ls -la /test*
+    # - cat /test*
 
 
 #http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-push-docker-image/
