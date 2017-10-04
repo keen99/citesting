@@ -3,6 +3,7 @@ FROM ubuntu:14.04
 ##make sure deb related stuff knows we cant interact!  why this isn't part of the default images...well...
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN echo "$date" >  "/first-build-$(date)"
 
 
 ## no awscli, we dont do docker inside docker
@@ -19,3 +20,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 
 RUN touch "test-$(date)"
+
+RUN echo "$date" >  "/next-build-$(date)" && ls -l /*build*
+
+ENV DEBIAN_FRONTEND teletype

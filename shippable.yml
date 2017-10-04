@@ -5,13 +5,19 @@ machine:
 #http://docs.shippable.com/integrations/imageRegistries/ecr/
 integrations:
   hub:
-    - integrationName: ecr-integration
+    # - integrationName: ecr-integration
+    #   type: ecr
+    #   region: us-east-1
+    #   agent_only: true
+    - integrationName: showdownlive_build_ecr_rw
       type: ecr
-      region: us-east-1
-      agent_only: true
-      # branches:
-      #   only:
-      #     - master
+      region: us-west-2
+
+env:
+  global:
+    - ECR_PREFIX="569641690693.dkr.ecr.us-west-2.amazonaws.com"
+##this is really the ECR repo....
+    - IMAGE_NAME="$ECR_PREFIX/showdownlive_build"
 
 
 
@@ -19,17 +25,36 @@ build:
 
   pre_ci:
   # Used primarily if you need to use a custom image for your build or if you need to customize behavior of the default CI container.
-##pull first?
-    # - docker images
-    - docker pull 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
-    - cat $JOB_STATE/my_image.env
-    - ls -laR
-    - date
-    - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
-    - cat $JOB_STATE/my_image.env
-    - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
-    - docker push 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
-    # - docker images
+# ##pull first?
+#     # - docker images
+#     - docker pull 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
+#     - cat $JOB_STATE/my_image.env
+#     - ls -laR
+#     - date
+#     - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
+#     - cat $JOB_STATE/my_image.env
+#     - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
+#     - docker push 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
+#     # - docker images
+
+     - docker images
+     ## might need --all-tags
+     # - docker pull ${IMAGE_NAME}:latest || true
+     - docker images
+     - export IMAGE_TAG=$BRANCH.$BUILD_NUMBER
+     - echo "building and pushing $IMAGE_NAME:$IMAGE_TAG"
+     ## --pull to pull pieces that are not cached instead of building them
+     ## --rm=false to avoid purging from cache in case we hit this node again
+     ## - < Dockerfile to avoid sending ./ as context to the build - we dont need it for docker build
+     ## this alone is NOT adequate on a fresh node
+     - docker build --pull --rm=false -t $IMAGE_NAME:$IMAGE_TAG - < Dockerfile
+     # - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+    # this should probably only push on change, and pass the version number another way.
+     - docker push $IMAGE_NAME:$IMAGE_TAG
+     - docker push $IMAGE_NAME:latest
+     - docker images
+
+
 
   pre_ci_boot:
   # Used to override the default image used for CI with your own custom image. You can also set specific options for booting up the default CI container.
