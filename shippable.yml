@@ -41,7 +41,7 @@ build:
      - docker images
      ## might need --all-tags
      - export IMAGE_TAG=${TAG_PREFIX}$BRANCH.$BUILD_NUMBER
-     - docker pull ${IMAGE_NAME}:${TAG_PREFIX}latest && docker tag $IMAGE_NAME:${TAG_PREFIX}latest $IMAGE_NAME:$IMAGE_TAG
+     - (docker pull ${IMAGE_NAME}:${TAG_PREFIX}latest && docker tag $IMAGE_NAME:${TAG_PREFIX}latest $IMAGE_NAME:$IMAGE_TAG)|| true
      - docker images
      - echo "building and pushing $IMAGE_NAME:$IMAGE_TAG"
      ## --pull to pull pieces that are not cached instead of building them
