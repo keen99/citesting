@@ -28,7 +28,7 @@ build:
   pre_ci:
   # Used primarily if you need to use a custom image for your build or if you need to customize behavior of the default CI container.
 # ## pull first?
-#     # - docker images --all | grep $ECR_PREFIX
+#     # - docker images --all | grep $ECR_PREFIX || true
 #     - docker pull 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
 #     - cat $JOB_STATE/my_image.env
 #     - ls -laR
@@ -37,14 +37,14 @@ build:
 #     - cat $JOB_STATE/my_image.env
 #     - docker build -t 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img .
 #     - docker push 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
-#     # - docker images --all | grep $ECR_PREFIX
+#     # - docker images --all | grep $ECR_PREFIX || true
 
      - hostname
-     - docker images --all | grep $ECR_PREFIX
+     - docker images --all | grep $ECR_PREFIX || true
      ## might need --all-tags
      - export IMAGE_TAG=${TAG_PREFIX}$BRANCH.$BUILD_NUMBER
      - (docker pull ${IMAGE_NAME}:${TAG_PREFIX}latest && docker tag $IMAGE_NAME:${TAG_PREFIX}latest $IMAGE_NAME:$IMAGE_TAG)|| true
-     - docker images --all | grep $ECR_PREFIX
+     - docker images --all | grep $ECR_PREFIX || true
      - echo "building and pushing $IMAGE_NAME:$IMAGE_TAG"
      ## --pull to pull pieces that are not cached instead of building them
      ## --rm=false to avoid purging from cache in case we hit this node again
@@ -55,7 +55,7 @@ build:
     # this should probably only push on change, and pass the version number another way.
      - docker push $IMAGE_NAME:$IMAGE_TAG
      - docker push $IMAGE_NAME:${TAG_PREFIX}latest
-     - docker images --all | grep $ECR_PREFIX
+     - docker images --all | grep $ECR_PREFIX || true
 
 
 
@@ -73,7 +73,7 @@ build:
 ## no awscli, we dont do docker inside docker
 #https://github.com/Shippable/support/issues/2945
 #http://docs.shippable.com/tutorials/ci/hub-amazon-ecr-custom-ci-image/
-      # - docker images --all | grep $ECR_PREFIX
+      # - docker images --all | grep $ECR_PREFIX || true
       # - ls -laR
       # - cat $JOB_STATE/my_image.env
 
