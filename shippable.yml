@@ -18,6 +18,7 @@ env:
     - ECR_PREFIX="569641690693.dkr.ecr.us-west-2.amazonaws.com"
 ##this is really the ECR repo....
     - IMAGE_NAME="$ECR_PREFIX/showdownlive_build"
+    - TAG_PREFIX="citesting."  ##use project specific tags
 
 
 
@@ -39,19 +40,19 @@ build:
 
      - docker images
      ## might need --all-tags
-     - docker pull ${IMAGE_NAME}:latest && docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+     - export IMAGE_TAG=${TAG_PREFIX}$BRANCH.$BUILD_NUMBER
+     - docker pull ${IMAGE_NAME}:${TAG_PREFIX}latest && docker tag $IMAGE_NAME:${TAG_PREFIX}latest $IMAGE_NAME:$IMAGE_TAG
      - docker images
-     - export IMAGE_TAG=$BRANCH.$BUILD_NUMBER
      - echo "building and pushing $IMAGE_NAME:$IMAGE_TAG"
      ## --pull to pull pieces that are not cached instead of building them
      ## --rm=false to avoid purging from cache in case we hit this node again
      ## - < Dockerfile to avoid sending ./ as context to the build - we dont need it for docker build
      ## this alone is NOT adequate on a fresh node
      - docker build --pull --rm=false -t $IMAGE_NAME:$IMAGE_TAG - < Dockerfile
-     - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+     - docker tag -f $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:${TAG_PREFIX}latest
     # this should probably only push on change, and pass the version number another way.
      - docker push $IMAGE_NAME:$IMAGE_TAG
-     - docker push $IMAGE_NAME:latest
+     - docker push $IMAGE_NAME:${TAG_PREFIX}latest
      - docker images
 
 
