@@ -16,6 +16,11 @@ RUN echo "$date" >  "/first-build-$(date)"
 ## use same packages we use from ansible - ish, since we dont enforce versions in either.
 
 
+RUN \
+  apt-get update && \
+  apt-get install -y python python-pip
+RUN pip install awscli
+
 
 
 
