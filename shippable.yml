@@ -39,7 +39,7 @@ build:
 
      - docker images
      ## might need --all-tags
-     # - docker pull ${IMAGE_NAME}:latest || true
+     - docker pull ${IMAGE_NAME}:latest && docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
      - docker images
      - export IMAGE_TAG=$BRANCH.$BUILD_NUMBER
      - echo "building and pushing $IMAGE_NAME:$IMAGE_TAG"
@@ -48,7 +48,7 @@ build:
      ## - < Dockerfile to avoid sending ./ as context to the build - we dont need it for docker build
      ## this alone is NOT adequate on a fresh node
      - docker build --pull --rm=false -t $IMAGE_NAME:$IMAGE_TAG - < Dockerfile
-     # - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+     - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
     # this should probably only push on change, and pass the version number another way.
      - docker push $IMAGE_NAME:$IMAGE_TAG
      - docker push $IMAGE_NAME:latest
