@@ -27,7 +27,7 @@ build:
 
   pre_ci:
   # Used primarily if you need to use a custom image for your build or if you need to customize behavior of the default CI container.
-# ##   pull first?
+# ##  pull first?
 #     # - docker images --all | grep $ECR_PREFIX || true
 #     - docker pull 085114940579.dkr.ecr.us-east-1.amazonaws.com/devexi:dsr-test-img
 #     - cat $JOB_STATE/my_image.env
