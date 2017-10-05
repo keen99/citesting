@@ -69,7 +69,7 @@ build:
   #   options: "-e HOME=/root"
     image_name: $IMAGE_NAME
     image_tag: $IMAGE_TAG
-    pull: true
+    # pull: true
 ###on INTEGRATIONs not here.
     # agent_only: true
 ## no awscli, we dont do docker inside docker
