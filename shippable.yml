@@ -40,6 +40,7 @@ build:
 #     # - docker images --all | grep $ECR_PREFIX || true
 
      - hostname
+     - docker --version
      - docker images --all | grep $ECR_PREFIX || true
      - export IMAGE_TAG=${TAG_PREFIX}$BRANCH.$BUILD_NUMBER
      ## pull latest if available, then tag it to make it our build
@@ -51,8 +52,9 @@ build:
      ## - < Dockerfile to avoid sending ./ as context to the build - we dont need it for docker build
      ## this alone is NOT adequate on a fresh node
      - docker build --pull --rm=false -t $IMAGE_NAME:$IMAGE_TAG - < Dockerfile
-     # now tag our fresh build - if it's fresh - as latest
-     - docker tag -f $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:${TAG_PREFIX}latest
+     ## now tag our fresh build - if it's fresh - as latest
+     ## docker <1.10 required -f, docker >1.12 breaks with -f.  so try both instead of trying to do version testing.  we get different versions on different shippable build nodes
+     - docker tag -f $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:${TAG_PREFIX}latest || docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:${TAG_PREFIX}latest
      ## this does internal change detection and wont push if it didnt change
      # - docker push $IMAGE_NAME:$IMAGE_TAG
      ## we only need latest, we dont need to push the build-specific image.
