@@ -28,4 +28,7 @@ RUN touch "test-$(date)"
 
 RUN echo "$date" >  "/next-build-$(date)" && ls -l /*build*
 
+RUN echo "$date" >  "/3-build-$(date)" && ls -l /*build*
+
+
 ENV DEBIAN_FRONTEND teletype
