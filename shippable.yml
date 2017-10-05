@@ -41,8 +41,8 @@ build:
 
      - hostname
      - docker images --all | grep $ECR_PREFIX || true
-     ## might need --all-tags
      - export IMAGE_TAG=${TAG_PREFIX}$BRANCH.$BUILD_NUMBER
+     ## pull latest if available, then tag it to make it our build
      - (docker pull ${IMAGE_NAME}:${TAG_PREFIX}latest && docker tag $IMAGE_NAME:${TAG_PREFIX}latest $IMAGE_NAME:$IMAGE_TAG)|| true
      - docker images --all | grep $ECR_PREFIX || true
      - echo "building and pushing $IMAGE_NAME:$IMAGE_TAG"
@@ -51,9 +51,11 @@ build:
      ## - < Dockerfile to avoid sending ./ as context to the build - we dont need it for docker build
      ## this alone is NOT adequate on a fresh node
      - docker build --pull --rm=false -t $IMAGE_NAME:$IMAGE_TAG - < Dockerfile
+     # now tag our fresh build - if it's fresh - as latest
      - docker tag -f $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:${TAG_PREFIX}latest
-    # this should probably only push on change, and pass the version number another way.
-     - docker push $IMAGE_NAME:$IMAGE_TAG
+     ## this does internal change detection and wont push if it didnt change
+     # - docker push $IMAGE_NAME:$IMAGE_TAG
+     ## we only need latest, we dont need to push the build-specific image.
      - docker push $IMAGE_NAME:${TAG_PREFIX}latest
      - docker images --all | grep $ECR_PREFIX || true
 
@@ -82,6 +84,7 @@ build:
     # - ls -laR
     - echo "yello"
     - ls -l /*build*
+    - env | grep citesting
     # - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/my_image.env
     # - cat $JOB_STATE/my_image.env
     # - date
