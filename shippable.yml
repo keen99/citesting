@@ -19,7 +19,7 @@ env:
     - ECR_PREFIX="569641690693.dkr.ecr.us-west-2.amazonaws.com"
 ##this is really the ECR repo....
     - IMAGE_NAME="$ECR_PREFIX/showdownlive_build"
-    - TAG_PREFIX="citesting."  ##use project specific tags
+    - TAG_PREFIX="${REPO_NAME}."  ##use project specific tags
 
 
 
@@ -69,6 +69,7 @@ build:
   #   options: "-e HOME=/root"
     image_name: $IMAGE_NAME
     image_tag: $IMAGE_TAG
+    #dont pull we built/pulled it up there.
     # pull: true
 ###on INTEGRATIONs not here.
     # agent_only: true
