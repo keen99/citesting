@@ -1,6 +1,12 @@
 #
 machine:
 
+
+branches:
+  only:
+    - none
+
+
 language: none
 
 #http://docs.shippable.com/integrations/imageRegistries/ecr/

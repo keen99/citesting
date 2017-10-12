@@ -1,0 +1,46 @@
+general:
+#   branches:
+#     ignore:
+#       - /jouellette-.*/
+#       - /agrabish-.*/
+# #   branches:
+# #     only:
+# #       - /dsr-.*/
+# # #      - /feature-.*/ # or regexes
+
+
+
+
+machine:
+  environment:
+    CIRCLE_DSR0: "test machine level"
+
+
+
+dependencies:
+  pre:
+#   # environment: - warning
+#   #   CIRCLE_DSR: "test deps level" ## NO
+  override:
+     - echo "deps"
+# #    - set| grep -e CIRCLE -e CI | grep -e "="
+    # - set| grep -e "dsr" -e "DSR":
+    #     environment:
+    #       dsr: ohfuck
+    #       CIRCLE_DSR45: singleword
+    #       CIRCLE_DSR2: "test command level"
+
+test:
+  override:
+    #have to have something here to keep it from trying to $magic up tests
+    - echo "We don't need no stinkin tests"
+#  post:
+
+
+deployment:
+  stage:
+    tag: /^RELEASE_BETA_.*_RC.*/
+    commands:
+      ## set appname for readability of the logs, not because we have to.
+      ## these only run if they find a tarball to ship.
+      - echo "stage deploy on tag"
