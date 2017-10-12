@@ -25,9 +25,9 @@ aws_generator:
   add_docker: true
 
 
-aws_generator:
-  image: codeship/aws-ecr-dockercfg-generator
-  encrypted_env_file: .aws.ecr.env.encrypted # contains Secret, AccessKey and Region
+# aws_generator:
+#   image: codeship/aws-ecr-dockercfg-generator
+#   encrypted_env_file: .aws.ecr.env.encrypted # contains Secret, AccessKey and Region
 
 
 
