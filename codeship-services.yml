@@ -17,7 +17,8 @@ showdownlive_build_build:
   cached: true
   environment:
     EXAMPLE_ENV_VAR: example-var
-
+  links:
+    - showdownlive_build_pull
 
 aws_generator:
   image: codeship/aws-ecr-dockercfg-generator
