@@ -2,12 +2,6 @@
 # # version: '2'
 # services:
 
-showdownlive_build_pull:
-  image: 569641690693.dkr.ecr.us-west-2.amazonaws.com/showdownlive_build
-  image_tag: citesting.latest
-  dockercfg_service: aws_generator
-  cached: true
-
 showdownlive_build_build:
   build:
     image: 569641690693.dkr.ecr.us-west-2.amazonaws.com/showdownlive_build
