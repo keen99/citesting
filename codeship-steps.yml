@@ -1,32 +1,32 @@
 
 
 
-# - type: serial
+# # - type: serial
+# #   steps:
+# #     - name: dockerhub_push
+# #       service: demo
+# #       type: push
+# #       image_name: account/repo
+# #       registry: https://index.docker.io/v1/
+# #       encrypted_dockercfg_path: dockercfg.encrypted
+
+
+# # - type: push
+#   # service: app
+#   # registry: https://108487657846.dkr.ecr.us-east-1.amazonaws.com
+#   # image_name:  108487657846.dkr.ecr.us-east-1.amazonaws.com/myuser/myapp
+#   # dockercfg_service: aws_generator
+
+
+# - type: parallel
+#   name: example_parallel_step
 #   steps:
-#     - name: dockerhub_push
-#       service: demo
-#       type: push
-#       image_name: account/repo
-#       registry: https://index.docker.io/v1/
-#       encrypted_dockercfg_path: dockercfg.encrypted
-
-
-# - type: push
-  # service: app
-  # registry: https://108487657846.dkr.ecr.us-east-1.amazonaws.com
-  # image_name:  108487657846.dkr.ecr.us-east-1.amazonaws.com/myuser/myapp
-  # dockercfg_service: aws_generator
-
-
-- type: parallel
-  name: example_parallel_step
-  steps:
-    - service: showdownlive_build_build
-      command: printenv
-    - service: showdownlive_build_build
-      command: ls
-- name: example_tagged_step
-  tag: master
-  service: showdownlive_build_build
-  command: echo "Deploy here!"
+#     - service: showdownlive_build_build
+#       command: printenv
+#     - service: showdownlive_build_build
+#       command: ls
+# - name: example_tagged_step
+#   tag: master
+#   service: showdownlive_build_build
+#   command: echo "Deploy here!"
 

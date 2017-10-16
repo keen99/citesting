@@ -1,30 +1,30 @@
-## ... jet doesnt support this format
-# # version: '2'
-# services:
+# ## ... jet doesnt support this format
+# # # version: '2'
+# # services:
 
-showdownlive_build_build:
-  build:
-    image: 569641690693.dkr.ecr.us-west-2.amazonaws.com/showdownlive_build
-    dockerfile_path: Dockerfile
-    image_tag: citesting.latest
-  dockercfg_service: aws_generator
-  cached: true
-  environment:
-    EXAMPLE_ENV_VAR: example-var
-
-aws_generator:
-  image: codeship/aws-ecr-dockercfg-generator
-  encrypted_env_file: .aws.ecr.env.encrypted # contains Secret, AccessKey and Region
-  add_docker: true
-
+# showdownlive_build_build:
+#   build:
+#     image: 569641690693.dkr.ecr.us-west-2.amazonaws.com/showdownlive_build
+#     dockerfile_path: Dockerfile
+#     image_tag: citesting.latest
+#   dockercfg_service: aws_generator
+#   cached: true
+#   environment:
+#     EXAMPLE_ENV_VAR: example-var
 
 # aws_generator:
 #   image: codeship/aws-ecr-dockercfg-generator
 #   encrypted_env_file: .aws.ecr.env.encrypted # contains Secret, AccessKey and Region
+#   add_docker: true
+
+
+# # aws_generator:
+# #   image: codeship/aws-ecr-dockercfg-generator
+# #   encrypted_env_file: .aws.ecr.env.encrypted # contains Secret, AccessKey and Region
 
 
 
-# # Dockerfile
-# FROM 108487657846.dkr.ecr.us-east-1.amazonaws.com/myuser/myapp
+# # # Dockerfile
+# # FROM 108487657846.dkr.ecr.us-east-1.amazonaws.com/myuser/myapp
 
-# ADD ./ /opt/app
+# # ADD ./ /opt/app
