@@ -23,13 +23,14 @@
 ## and name:'s have to be unique....
 ## steps CANNOT be multiple commands - ; || or && are all failures.  as is command: command:
 # command the command to run. This is always required, and identifies a step as a run step. Note that quotes are respected to split up arguments, but special characters such as &&, | or > are not.
+## shell globs also dont work.
   services:
     - showdownlive_build_build
   steps:
     - name: printenv
       command: printenv
     - name: ls pwd
-      command: "pwd;ls -la"
+      command: ls -la
     - name: ls /
       command: ls -la /
     - name: ls /build
