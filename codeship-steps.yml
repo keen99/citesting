@@ -36,7 +36,7 @@
     - name: ls /build
       command: ls -la /build
     - name: du
-      command: "du -hsc /build/.[a-z0-9]* /build/*"
+      command: du -hsc /build/
     - name: versions
       command: bundle --version
       #&& mvn -v && java -version && node --version && ruby --version && python --version
