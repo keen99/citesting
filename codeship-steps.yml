@@ -24,8 +24,10 @@
     - service: showdownlive_build_build
       command: printenv
     - service: showdownlive_build_build
-      command: ls
+     command: ls
+    - service: showdownlive_build_build
       command: pwd;ls -la;echo /; ls -la /; echo build; ls -la /build
+    - service: showdownlive_build_build
       command: bundle --version && mvn -v && java -version && node --version && ruby --version && python --version
 - name: example_tagged_step
   tag: master
