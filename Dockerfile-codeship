@@ -1,0 +1,3 @@
+FROM 569641690693.dkr.ecr.us-west-2.amazonaws.com/showdownlive_build:showdownlive.latest
+
+ADD ./ /build
