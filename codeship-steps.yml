@@ -19,14 +19,20 @@
 
 
 - type: parallel
-  name: example_parallel_step
+  name: pstep
   steps:
     - service: showdownlive_build_build
       command: printenv
     - service: showdownlive_build_build
       command: ls
     - service: showdownlive_build_build
-      command: pwd;ls -la;echo /; ls -la /; echo build; ls -la /build
+      command: pwd;ls -la
+    - service: showdownlive_build_build
+      command: echo /; ls -la /
+    - service: showdownlive_build_build
+      command: echo build; ls -la /build
+    - service: showdownlive_build_build
+      command: cd /build; pwd; du -hsc .[a-z0-9]* *
     - service: showdownlive_build_build
       command: bundle --version && mvn -v && java -version && node --version && ruby --version && python --version
 - name: example_tagged_step
