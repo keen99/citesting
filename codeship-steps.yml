@@ -24,7 +24,7 @@
     - service: showdownlive_build_build
       command: printenv
     - service: showdownlive_build_build
-     command: ls
+      command: ls
     - service: showdownlive_build_build
       command: pwd;ls -la;echo /; ls -la /; echo build; ls -la /build
     - service: showdownlive_build_build
