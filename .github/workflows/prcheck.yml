@@ -1,0 +1,15 @@
+name: PR Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check something on PR
+      run: |
+        echo "checking something"
+        echo "failing"
+        exit 1
